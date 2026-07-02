@@ -1,0 +1,205 @@
+1. 版本號
+git version  
+
+2. 設定全域使用者(雲端)
+git config --global user.name arthur
+git config --global user.email arthur201010@gmail.com
+
+3.初始化倉庫
+git init
+
+4.倉庫狀態
+git status
+git config --list
+
+5.加入控管(暫存區)
+git add filename
+git add . (所有變動一次加入)
+
+6.四種狀態
+U -> Untrack
+U -> A (Added)
+A -> M (Modified)
+A -> D (Deleted)
+
+7.刪除後恢復(shift+del)
+git restore filename
+
+8.檢視暫存區
+git ls-files -s
+
+9.檢視 object  #7/16 1- 2:05:00
+git cat-file -t (型態) shal(前六碼)
+             -p (內容) shal(前六碼)
+
+10.加入倉庫儲存
+git commit -m "第一次檔案儲存"
+            (m:指message)
+git commit -am message
+
+11.檢視倉庫狀態 # 1- 2:30:00
+git log
+git log --oneline (只取摘要)
+git log --graph
+
+12.暫存區檔案恢復(至工作目錄A->U)
+git restore --staged filename
+
+13.倉庫區檔案恢復(至工作目錄U)
+git rm --cached filename
+
+14.強制刪除(remove)
+   git rm -f 4.txt
+
+比較: git rm 1.txt
+ 需再使用restore --staged
+ 及add(或restore)確認,不宜用
+
+15.產生分支 
+git branch branch-name
+
+16.檢視分支
+git branch
+
+17.切換分支
+git checkout branch-name
+
+18.捨棄變更
+git checkout . 
+
+19.合併分支(基本上切換master去合併其他分支)
+git checkout master
+git merge test
+
+20.合併問題?! 1:56:00
+同時間修改檔案並commit,合併後會產生衝突,
+需進行選擇與確認
+git add .
+git commit -m "完成合併衝突確認"
+
+21.刪除分支
+git branch -D test
+
+22.VIM編輯器用法 (2:00:00)
+1.使用 git commit 進入
+2.使用 i 進入編輯模式
+3.書寫完畢後使用esc鍵,切換到下方命令列
+4.輸入:wq 離開(write+quit)
+5.如果寫入失敗輸入:wq!(! =>強制模式)
+
+23.練習
+1.新增3.py,完成後加入控管跟commit
+  -讓使用者可以輸入兩個數字a,b
+  判斷a,b大小並輸出差值
+  譬如:b比a大10 或 b跟a一樣大
+
+2.增加3個檔案跟commit log
+
+24.切換commit-log  #7/18 2:30:00
+git checkout 4a8cc8
+    -檔案總管恢復至該階段
+    -git branch(HEAD指向該階段)
+git checkout master <=切回原來
+    -檔案總管恢復原來
+
+25.重置到某一個commit-log
+git reset 4a8cc8
+    -檔案總管該階段之後改為U
+    -Already on master
+git reset --hard f95d4fd
+    -HEAD is now at f95d4fd 新增c.txt
+    -此階段後歷程皆刪除
+
+26.檢視所有歷程
+git reflog
+
+27.綁定雲端網址 GitHub.com > new > 輸入專案名稱 > Create repositorey
+git remote add origin https://github.com/
+git remote add origin https://github.com/Arthur201010/git-demo.git
+git remote add origin https://github.com/Arthur201010/todolist-project
+
+
+28.檢視綁定的雲端網址
+git remote -v
+
+29.本地端推送到雲端
+git push
+
+30.複製專案
+git clone https://github.com/Arthur201010/git-demo.git
+
+31.git checkout -b test(新增切換一次完成)
+- git branch test
+- git checkout test  # 7/23 3- 0:40:00
+
+32.雲端同步到本地端
+- git pull
+
+33.刪除雲端分支
+- git push --delete origin test
+
+34.合併上一次的commit log
+- git commit --amend
+
+- git commit -am "message"
+
+35.強制推送
+- git push -f   # 7/23 1:30:00
+ 
+36.回到上一log
+- git reset --hard HEAD-1
+
+37.git token
+- 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
+
+38.
+- git push --set-upstream origin master
+
+39.    form {
+            width: 60%;
+            height: 150px;
+            /* margin: 12px; */
+        }
+        @media screen and (max-width:1024px) {
+            form {
+                width: 80%;
+            }
+        }
+        @media screen and (max-width:768px) {
+            form {
+                width: 100%;
+                /* margin: 0px; */
+            }
+        }
+
+(.venv) C:\Users\user\OneDrive\Desktop\jango\jango\todolist-project>git remote add origin https://github.com/Arthur201010/todolist-project
+
+(.venv) C:\Users\user\OneDrive\Desktop\jango\jango\todolist-project>git remote -v
+origin  https://github.com/Arthur201010/todolist-project (fetch)
+origin  https://github.com/Arthur201010/todolist-project (push)
+
+(.venv) C:\Users\user\OneDrive\Desktop\jango\jango\todolist-project>git push
+fatal: The current branch master has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin master
+
+To have this happen automatically for branches without a tracking
+upstream, see 'push.autoSetupRemote' in 'git help config'.
+
+
+(.venv) C:\Users\user\OneDrive\Desktop\jango\jango\todolist-project>git push --set-upstream origin master
+Enumerating objects: 19, done.
+Counting objects: 100% (19/19), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (15/15), done.
+Writing objects: 100% (19/19), 4.64 KiB | 365.00 KiB/s, done.
+Total 19 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/Arthur201010/todolist-project
+ * [new branch]      master -> master
+branch 'master' set up to track 'origin/master'.
+
+
+
+
